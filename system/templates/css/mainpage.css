@@ -1,0 +1,24 @@
+.mp_panel {
+	flex-basis: 300px;
+    flex-grow: 1;
+    margin: 0px 20px 20px 0px;
+    padding: 20px;
+    height: 300px;
+    width: 300px;
+	font-size: 13px;
+    color: #7777777;
+    box-sizing: border-box;
+    border: solid 1px #c7c7c7;
+    border-radius: 10px;
+    background-color: #fff;
+    transition: 0.3s;
+    box-shadow: 0px 3px 5px rgb(0 0 0 / 20%);
+}
+
+.mp_panel_title {
+	font-size: 20px;
+    font-weight: 400;
+    text-decoration: none;
+    color: var(--color-active);
+	margin-bottom: 10px;
+}

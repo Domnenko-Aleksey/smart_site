@@ -1,0 +1,19 @@
+#da_question {
+	font-size: 24px;
+	font-style: italic;
+	color: var(--da-color-active);
+	text-align: center;
+}
+
+
+/* --- SYNTHESIS --- */
+.da_synthesis {
+	align-items: center;
+    gap: 10px;
+}
+
+.da_synthesis input.dan_input {
+    flex-grow: 1;
+    max-width: 600px;
+	border: solid 1px #ccc;
+}

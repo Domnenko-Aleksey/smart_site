@@ -1,0 +1,35 @@
+body {
+    display: flex;
+    justify-content: center;
+	align-items: center;
+	background:url('/system/templates/images/bg.jpg');
+	background-size: cover;
+}
+
+#content {
+    display: flex;
+	flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+	width: 300px;
+    height: 350px;
+	padding: 20px;
+    background-color: hsl(241deg 100% 66% / 68%);
+	border: solid 1px hsl(189deg 100% 50% / 68%);
+    border-radius: 25px;
+	box-shadow: 5px 5px 20px hsl(241deg 100% 66% / 68%);
+	backdrop-filter: blur(5px);
+	box-sizing: border-box;
+}
+
+.login_form_submit {
+	color: #fff;
+	background-color: #ffc107 !important;
+	width: 100%;
+}
+
+.login_form_text {
+	color: #ffffff;
+	margin-bottom: -5px;
+}

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'>
+<link rel="icon" href="/system/templates/images/favicon.svg" type="image/svg+xml">
+<title>{{ title | safe }}</title>
+<link rel="stylesheet" href="/system/templates/css/system.css" />
+{{ head | safe }}
+</head>
+<body>
+{% if not AUTH %}
+	<div id="content">{{ content | safe }}</div>
+{% else %}
+<div class="left_panel">
+	<div class="left_panel_header">Союз</div>
+	<a href="/system/projects" class="left_ico_square">
+		<svg><use xlink:href="/system/templates/images/sprite.svg#projects"></use></svg>
+		<div class="left_ico_square_text">Проекты</div>
+	</a>
+	<a href="/system/com/search" class="left_ico_square">
+		<svg><use xlink:href="/system/templates/images/sprite.svg#search_folder"></use></svg>
+		<div class="left_ico_square_text">Поиск по сайту</div>
+	</a>
+	<a href="/system/users" class="left_ico_square">
+		<svg><use xlink:href="/system/templates/images/sprite.svg#users"></use></svg>
+		<div class="left_ico_square_text">Пользователи</div>
+	</a>
+	<a href="/system/docs" class="left_ico_square">
+		<svg><use xlink:href="/system/templates/images/sprite.svg#help"></use></svg>
+		<div class="left_ico_square_text">Помощь</div>
+	</a>
+</div>
+<div class="main">
+	<div class="header">
+		<a href="/system" target="blank" class="header_ico_square">
+			<svg><use xlink:href="/system/templates/images/sprite.svg#home"></use></svg>
+			<div class="header_ico_square_text">Главная</div>
+		</a>
+	</div>
+	<div id="content" class="content">{{ content | safe }}</div>
+	<div class="footer"><a href="https://63s.ru">Команда Союз</a></div>
+</div>
+{% endif %}
+</body>
+</html>
+
+
+
+
+
+
+

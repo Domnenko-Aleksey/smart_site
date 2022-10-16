@@ -1,0 +1,40 @@
+.w_400 {
+	width: 100%;
+	max-width: 400px;
+}
+
+.ss_flex_row, .ss_flex_row_v_centr {
+	display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+    align-content: center;
+	justify-content: flex-start;
+	margin-bottom: 10px;
+	padding: 10px;
+	background-color: #ffffff;
+}
+
+.ss_flex_row_v_centr {
+	align-items: center;
+}
+
+.ss_title {
+	display: block;
+	font-size: 19px;
+    line-height: 24px;
+	text-decoration: none;
+}
+
+.ss_description {
+    font-size: 14px;
+	color: 333;
+}
+
+.ss_image {
+	width: 120px;
+}
+
+.ss_price {
+	font-size: 19px;
+    font-weight: 600;
+}

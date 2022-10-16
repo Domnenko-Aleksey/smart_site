@@ -1,0 +1,53 @@
+.user_name_container {
+	margin-bottom: 20px;
+}
+
+.user_name {
+	color: #999;
+	padding-left: 10px;
+	text-decoration: none;
+}
+
+
+/* --- ico square --- */
+.ico_square {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 0px 20px 20px 0px;
+    padding: 10px;
+    height: 120px;
+    width: 120px;
+    box-sizing: border-box;
+    text-decoration: none;
+    color: var(--color-active);
+    /* border: solid 1px #2196F3; */
+    border-radius: 10px;
+    background-color: #fff;
+    transition: 0.3s;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+.ico_square:hover {
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+    transform: scale(.97);
+    color: #777777;
+    border-color: #C7C7C7;
+}
+
+.ico_square svg {
+    width: 50px;
+    height: 50px;
+    fill: #2196F3;
+    transition: 0.3s;
+}
+
+.ico_square:hover svg {
+    fill: #777777;
+}
+
+.ico_square_text {
+    margin-top: 10px;
+    text-align: center;
+}

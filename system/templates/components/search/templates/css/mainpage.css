@@ -1,0 +1,30 @@
+.dan_contextmenu_scan_site {
+	background: url('/system/templates/components/search/templates/images/sitemap.png') no-repeat left center;	
+}
+
+.dan_contextmenu_scan_page {
+	background: url('/system/templates/components/search/templates/images/page.png') no-repeat left center;	
+}
+
+.dan_contextmenu_search {
+	background: url('/system/templates/components/search/templates/images/search.png') no-repeat left center;	
+}
+
+
+.items_progress_html {
+	text-align: center;
+}
+
+#items_progress {
+	width: 100%;
+	height: 30px;
+}
+
+.modal_center_wrap {
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+.w_300 {
+	width: 300px !important;
+}
