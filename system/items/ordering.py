@@ -6,6 +6,6 @@ def ordering(SITE):
     act = SITE.p[2]
     id = SITE.p[3]
     ITEMS = Items(SITE)
-    project_id = ITEMS.setOrdering(id, act)
+    section_id = ITEMS.setOrdering(id, act)
     
-    return {'redirect': '/system/items/'+str(project_id)}
+    return {'redirect': '/system/items/'+str(section_id)}

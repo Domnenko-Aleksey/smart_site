@@ -7,21 +7,30 @@ class Items:
 
     # Возвращает item по id
     def getItem(self, id):
-        sql = 'SELECT id, project_id, name, questions, content, status, ordering FROM items WHERE id = %s'
+        sql = 'SELECT id, project_id, section_id, name, questions, content, status, ordering FROM items WHERE id = %s'
         self.db.execute(sql, (id))
         arr = self.db.fetchone()
         arr['content'] = json.loads(arr['content'])
         return arr
 
 
-    # Возвращает список items по project_id
-    def getItemList(self, project_id, sql_select=False, status=False):
-        if not sql_select:
-            sql_select = 'id, idx, project_id, name, content, date, status, ordering'
+    # Возвращает список items по section_id
+    def getListByProjectId(self, project_id, status=False):
         status = 'AND status = ' + str(int(status)) if status else ''  # int - для защиты от внесения строки
 
-        sql = f'SELECT {sql_select} ordering FROM items WHERE project_id = %s {status} ORDER BY ordering'
+        sql = f'SELECT id, name, questions, status, ordering FROM items WHERE project_id = %s {status} ORDER BY ordering'
         self.db.execute(sql, (project_id))
+        return self.db.fetchall()
+
+
+    # Возвращает список items по section_id
+    def getListBySectionId(self, section_id, sql_select=False, status=False):
+        if not sql_select:
+            sql_select = 'id, idx, section_id, name, content, date, status, ordering'
+        status = 'AND status = ' + str(int(status)) if status else ''  # int - для защиты от внесения строки
+
+        sql = f'SELECT {sql_select} ordering FROM items WHERE section_id = %s {status} ORDER BY ordering'
+        self.db.execute(sql, (section_id))
         return self.db.fetchall()
 
 
@@ -48,7 +57,7 @@ class Items:
         INSERT INTO items SET
             idx = 0,
             project_id = %s,
-            section_id = 0,
+            section_id = %s,
             name = %s,
             content = %s,
             questions = %s,
@@ -57,7 +66,15 @@ class Items:
             status = %s,
             ordering = %s
         '''
-        self.db.execute(sql, (data['project_id'], data['name'], json.dumps(data['content']), data['questions'], data['status'], data['ordering']))
+        self.db.execute(sql, (
+            data['project_id'], 
+            data['section_id'], 
+            data['name'], 
+            json.dumps(data['content']), 
+            data['questions'], 
+            data['status'], 
+            data['ordering']
+        ))
 
         sql = "SELECT MAX(id) max_id FROM items WHERE project_id = %s"
         self.db.execute(sql, (data['project_id']))
@@ -68,6 +85,7 @@ class Items:
     def update(self, data):
         sql = '''
         UPDATE items SET
+        section_id = %s,
         name = %s,
         content = %s,
         questions = %s,
@@ -76,7 +94,15 @@ class Items:
         ordering = %s
         WHERE id = %s
         '''
-        self.db.execute(sql, (data['name'], json.dumps(data['content']), data['questions'], data['status'], data['ordering'], data['id']))
+        self.db.execute(sql, (
+            data['section_id'], 
+            data['name'], 
+            json.dumps(data['content']), 
+            data['questions'], 
+            data['status'], 
+            data['ordering'], 
+            data['id']
+        ))
 
 
     # Обновляет индексы
@@ -121,10 +147,10 @@ class Items:
             arr[ordering] = next_id
 
         for i in arr:
-            sql = "UPDATE items SET ordering = %s WHERE project_id = %s AND id = %s"
-            self.db.execute(sql, (i+1, item_arr['project_id'], arr[i]))
+            sql = "UPDATE items SET ordering = %s WHERE section_id = %s AND id = %s"
+            self.db.execute(sql, (i+1, item_arr['section_id'], arr[i]))
 
-        return item_arr['project_id']
+        return item_arr['section_id']
 
 
     # Удаляет тему

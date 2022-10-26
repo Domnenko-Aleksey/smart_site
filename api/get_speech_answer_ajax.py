@@ -37,7 +37,7 @@ def get_speech_answer_ajax(SITE):
 
     # --- Получаем BERT-вектор для текста: ---
     question = SITE.post['speech_text']
-    param = {'text': question}
+    param = {'text': question.lower()}
     bert_req = requests.post('http://127.0.0.1:9003/bert_api', data=param)
     if int(bert_req.status_code) != 200:
         return json.dumps({'answer': 'error', 'message': 'No answer of BERT'})

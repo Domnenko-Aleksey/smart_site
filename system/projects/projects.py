@@ -13,6 +13,7 @@ from projects import get_vectors_ajax
 from projects import create_model_ajax
 from projects import check_bert_ajax
 from projects import fit_model_ajax
+from projects import init_model_ajax
 from projects import load_api_model_ajax
 
 
@@ -38,6 +39,7 @@ def router(SITE):
         'create_model_ajax': create_model_ajax.create_model_ajax,
         'check_bert_ajax': check_bert_ajax.check_bert_ajax,
         'fit_model_ajax': fit_model_ajax.fit_model_ajax,
+        'init_model_ajax': init_model_ajax.init_model_ajax,
         'load_api_model_ajax': load_api_model_ajax.load_api_model_ajax,
     }
 

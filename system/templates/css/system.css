@@ -361,6 +361,10 @@ a.dan_button_white {
 	background: url('/system/templates/images/upload.png') no-repeat left center;	
 }
 
+.dan_contextmenu_init {
+	background: url('/system/templates/images/init.png') no-repeat left center;	
+}
+
 .dan_contextmenu_check {
 	background: url('/system/templates/images/check.png') no-repeat left center;	
 }

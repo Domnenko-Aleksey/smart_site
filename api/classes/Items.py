@@ -2,6 +2,7 @@ import json
 
 class Items:
     def __init__(self, SITE):
+        self.db_connect = SITE.db_connect
         self.db = SITE.db
 
 

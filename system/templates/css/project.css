@@ -51,3 +51,49 @@
     margin-top: 10px;
     text-align: center;
 }
+
+
+/* ---  Иконки с текстом прямоугольные --- */
+.ico_rectangle_container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0px 20px 20px 0px;
+    padding: 5px 5px 5px 10px;
+    height: 40px;
+    width: 170px;
+    text-decoration: none;
+    color: #2196F3;
+    border-radius: 10px;
+    background-color: #fff;
+    transition: 0.3s;
+    box-sizing: border-box;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.ico_rectangle_container:hover {
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.3);
+    transform: scale(.97);
+    color: #777777;
+    border-color: #C7C7C7;
+}
+
+.ico_rectangle_container svg {
+    flex-basis: 30px;
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    fill: #2196F3;
+    transition: 0.3s;
+}
+
+.ico_rectangle_container:hover svg {
+    fill: #777777;
+}
+
+.ico_rectangle_text {
+    flex-grow: 1;
+    margin: 0px 10px;
+    font-size: 14px;
+}

@@ -21,7 +21,7 @@ def create_model_ajax(SITE):
     x = BatchNormalization()(x)
     x_output = Dense(classes_num, activation='softmax')(x)
     model = Model(inputs=x_input, outputs=x_output)
-    model.compile(loss='binary_crossentropy', optimizer=Adam(learning_rate=(0.0001)), metrics=['accuracy'])
+    model.compile(loss='binary_crossentropy', optimizer=Adam(learning_rate=(0.00001)), metrics=['accuracy'])
     SITE.model['model'] = model
 
     SITE.model['x'] = np.array(SITE.model['x'])

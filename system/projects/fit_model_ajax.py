@@ -56,7 +56,7 @@ def fit_model_ajax(SITE):
             os.remove(path_progress)
         plt.plot(SITE.model['history'])
         plt.title("Accuracy:")
-        plt.ylabel("Acc")
+        plt.ylabel("Accuracy")
         plt.xlabel("Epoch")
         plt.savefig(path_progress)
         plt.close()

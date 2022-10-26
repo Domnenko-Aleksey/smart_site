@@ -23,8 +23,12 @@ DA = {
 		'audio': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M6 7l8-5v20l-8-5v-10zm-6 10h4v-10h-4v10zm20.264-13.264l-1.497 1.497c1.847 1.783 2.983 4.157 2.983 6.767 0 2.61-1.135 4.984-2.983 6.766l1.498 1.498c2.305-2.153 3.735-5.055 3.735-8.264s-1.43-6.11-3.736-8.264zm-.489 8.264c0-2.084-.915-3.967-2.384-5.391l-1.503 1.503c1.011 1.049 1.637 2.401 1.637 3.888 0 1.488-.623 2.841-1.634 3.891l1.503 1.503c1.468-1.424 2.381-3.309 2.381-5.394z"/></svg>',
 		'audio_off': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M22 1.269l-18.455 22.731-1.545-1.269 3.841-4.731h-1.827v-10h4.986v6.091l2.014-2.463v-3.628l5.365-2.981 4.076-5.019 1.545 1.269zm-10.986 15.926v.805l8.986 5v-16.873l-8.986 11.068z"/></svg>',
 		'check': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M9 21.035l-9-8.638 2.791-2.87 6.156 5.874 12.21-12.436 2.843 2.817z"/></svg>',
+		'cross': '<svg xmlns="http://www.w3.org/2000/svg" id="da_show_cross" style="width:20px;height:20px;opacity:0.5" viewBox="0 0 24 24"><path d="M23 20.168l-8.185-8.187 8.185-8.174-2.832-2.807-8.182 8.179-8.176-8.179-2.81 2.81 8.186 8.196-8.186 8.184 2.81 2.81 8.203-8.192 8.18 8.192z"/></svg>',
+		'next': '<svg xmlns="http://www.w3.org/2000/svg" style="width:50px;height:50px;opacity:0.5" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-1.568 18.005l-1.414-1.415 4.574-4.59-4.574-4.579 1.414-1.416 5.988 5.995-5.988 6.005z"/></svg>',
 		'microphone': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M16 10c0 2.209-1.791 4-4 4s-4-1.791-4-4v-6c0-2.209 1.791-4 4-4s4 1.791 4 4v6zm4-2v2c0 4.418-3.582 8-8 8s-8-3.582-8-8v-2h2v2c0 3.309 2.691 6 6 6s6-2.691 6-6v-2h2zm-7 13.03v-2.03h-2v2.03c-2.282.139-4 .744-4 1.47 0 .829 2.238 1.5 5 1.5s5-.671 5-1.5c0-.726-1.718-1.331-4-1.47z"/></svg>',
-		'pause': '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M11 22h-4v-20h4v20zm6-20h-4v20h4v-20z"/></svg>'
+		'pause': '<svg xmlns="http://www.w3.org/2000/svg" style="width:50px;height:50px;opacity:0.5" viewBox="0 0 24 24"><path d="M11 22h-4v-20h4v20zm6-20h-4v20h4v-20z"/></svg>',
+		'play': '<svg xmlns="http://www.w3.org/2000/svg" style="width:50px;height:50px;opacity:0.5" viewBox="0 0 24 24"><path d="M12 2c5.514 0 10 4.486 10 10s-4.486 10-10 10-10-4.486-10-10 4.486-10 10-10zm0-2c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm-3 18v-12l10 6-10 6z"/></svg>',	
+		'prev': '<svg xmlns="http://www.w3.org/2000/svg" style="width:50px;height:50px;opacity:0.5" viewBox="0 0 24 24"><path d="M0 12c0 6.627 5.373 12 12 12s12-5.373 12-12-5.373-12-12-12-12 5.373-12 12zm7.58 0l5.988-5.995 1.414 1.416-4.574 4.579 4.574 4.59-1.414 1.416-5.988-6.006z"/></svg>'
 	},
 
 
@@ -65,7 +69,7 @@ DA = {
 		var link  = document.createElement('link');
 		link.rel  = 'stylesheet';
 		link.type = 'text/css';
-		link.href = 'https://xn----7sbb0blzeehe.xn--p1ai/plugin/smart_site.css';
+		link.href = 'https://xn----7sbb0blzeehe.xn--p1ai/plugin/smart_site.css?' + Math.floor(Math.random() * 1000000);
 		link.media = 'all';
 		head.appendChild(link);
 		return link
@@ -482,7 +486,7 @@ DA.show = function(_class, _id){
 						if(_but == 'button'){
 							if(!obj.timer){
 								document.getElementById('da_show_nav_play').removeChild(document.getElementById('da_show_nav_play').lastChild)
-								document.getElementById('da_show_nav_play').insertAdjacentHTML('afterbegin', '<svg class="da_show_nav"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://xn----7sbb0blzeehe.xn--p1ai/smart-site/templates/plugin/svg/sprite.svg#pause"></use></svg>')
+								document.getElementById('da_show_nav_play').insertAdjacentHTML('afterbegin', DA.icons.pause)
 							}
 							else{						
 								obj.stop()
@@ -546,25 +550,22 @@ class DA_show{
 		this.image = this.wrap.insertAdjacentElement('afterbegin', img_out)
 
 		// Навигация
-		let cross = document.createElement('div')
-		cross.id = 'da_show_cross'
-		cross.innerHTML = '<svg><use xlink:href="https://xn----7sbb0blzeehe.xn--p1ai/smart-site/templates/plugin/svg/sprite.svg#delete"></use></svg>'
-		this.wrap.insertAdjacentElement('afterbegin', cross)
+		this.wrap.insertAdjacentHTML('afterbegin', DA.icons.cross)
 
 		let nav_left = document.createElement('div')
 		nav_left.id = 'da_show_nav_left'
 		this.wrap.insertAdjacentElement('afterbegin', nav_left)
-		nav_left.insertAdjacentHTML('afterbegin', '<svg class="da_show_nav"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://xn----7sbb0blzeehe.xn--p1ai/smart-site/templates/plugin/svg/sprite.svg#prev"></use></svg>')
+		nav_left.insertAdjacentHTML('afterbegin', DA.icons.prev)
 
 		let nav_right = document.createElement('div')
 		nav_right.id = 'da_show_nav_right'
 		this.wrap.insertAdjacentElement('beforeend', nav_right)
-		nav_right.insertAdjacentHTML('afterbegin', '<svg class="da_show_nav"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://xn----7sbb0blzeehe.xn--p1ai/smart-site/templates/plugin/svg/sprite.svg#next"></use></svg>')
+		nav_right.insertAdjacentHTML('afterbegin', DA.icons.next)
 
 		let nav_play = document.createElement('div')
 		nav_play.id = 'da_show_nav_play'
 		this.wrap.insertAdjacentElement('afterbegin', nav_play)
-		nav_play.insertAdjacentHTML('afterbegin', '<svg class="da_show_nav"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://xn----7sbb0blzeehe.xn--p1ai/smart-site/templates/plugin/svg/sprite.svg#play"></use></svg>')		
+		nav_play.insertAdjacentHTML('afterbegin', DA.icons.play)		
 	}
 	
 	prev(){
@@ -581,7 +582,7 @@ class DA_show{
 
 	stop(){
 		document.getElementById('da_show_nav_play').removeChild(document.getElementById('da_show_nav_play').lastChild)
-		document.getElementById('da_show_nav_play').insertAdjacentHTML('afterbegin', '<svg class="da_show_nav"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="https://xn----7sbb0blzeehe.xn--p1ai/smart-site/templates/plugin/svg/sprite.svg#play"></use></svg>')		
+		document.getElementById('da_show_nav_play').insertAdjacentHTML('afterbegin', DA.icons.play)		
 		clearTimeout(this.timer)
 		this.timer = false
 	}

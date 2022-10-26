@@ -1,4 +1,3 @@
-import random
 import sys
 from aiohttp import web
 sys.path.append('classes')

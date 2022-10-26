@@ -1,6 +1,8 @@
 import json
-from Items import Items
 from Projects import Projects
+from Sections import Sections
+from Items import Items
+
 
 def mainpage(SITE):
     SITE.debug('PATH: /system/items/mainpage.py')
@@ -12,13 +14,16 @@ def mainpage(SITE):
     SITE.addHeadFile('/system/templates/css/list.css')
     SITE.addHeadFile('/system/templates/js/items_list.js')
 
-    project_id=SITE.p[2]
+    section_id = SITE.p[2]
+    SECTIONS = Sections(SITE)
+    section = SECTIONS.getSection(section_id)
+    project_id = section['project_id']
 
     PROJECT = Projects(SITE)
     projects = PROJECT.getProject(project_id)
 
     ITEM = Items(SITE)
-    items = ITEM.getItemList(project_id)
+    items = ITEM.getListBySectionId(section_id)
 
     tr_html = ''   
     for item in items:

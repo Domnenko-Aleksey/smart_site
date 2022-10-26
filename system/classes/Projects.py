@@ -66,13 +66,13 @@ class Projects:
     def getMaxOrdering(self):
         self.db.execute("SELECT MAX(ordering) max_ordering FROM projects")
         mo = self.db.fetchone()
-        return 0 if mo is None else mo['max_ordering']
+        return 0 if mo['max_ordering'] is None else mo['max_ordering']
 
 
     # Добавляет проект в БД
     def insert(self, data):
-        sql = "INSERT INTO projects SET domain = %s, user_id = %s, site = '', name = %s, title = %s, description = %s, settings = '', ordering = %s, status = %s"
-        self.db.execute(sql, (data['domain'], data['user_id'], data['name'], data['title'], data['description'], data['ordering'], data['status']))
+        sql = "INSERT INTO projects SET user_id = %s, domain = %s, name = %s, title = %s, description = %s, settings = '', ordering = %s, status = %s"
+        self.db.execute(sql, (data['user_id'], data['domain'], data['name'], data['title'], data['description'], data['ordering'], data['status']))
         self.db.execute("SELECT MAX(id) max_id FROM projects")
         return self.db.fetchone()['max_id']
 

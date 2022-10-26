@@ -1,3 +1,4 @@
+from Sections import Sections
 from Items import Items
 
 def edit(SITE):
@@ -22,6 +23,7 @@ def edit(SITE):
         title = 'Добавить'
         act = 'insert/'
         item = {
+            'section_id': 0,
             'name': '',
             'questions': '',
             'content': {
@@ -69,6 +71,15 @@ def edit(SITE):
 
         class_display_none = ''
 
+
+    # Разделы
+    SECTIONS = Sections(SITE)
+    sections = SECTIONS.getSections(project_id)
+
+    section_id_options = ''
+    for s in sections:
+        selected = 'selected' if s["id"] == item['section_id'] else ''
+        section_id_options += f'<option value="{s["id"]}" {selected}>{s["name"]}</option>'
 
     # --- YouTube ---
     if item['content']['youtube']['ratio'] == '16x9':
@@ -119,10 +130,15 @@ def edit(SITE):
 
 
     # --- Левый блок ---
-    block_left_html = f'<div id="da_block_left" class="da_block_left">{youtube_html}{images_html}</div>'
+    block_left_html = ''
+    if youtube_html != '' or images_html != '':
+        block_left_html = f'<div id="da_block_left" class="da_block_left">{youtube_html}{images_html}</div>'
+
 
     # --- Правый блок ---
-    block_right_html = f'<div id="da_block_right" class="da_block_right">{item["content"]["text"]}</div>'
+    block_right_html = ''
+    if item["content"]["text"] != '':
+        block_right_html = f'<div id="da_block_right" class="da_block_right">{item["content"]["text"]}</div>'
 
 
     # --- Контент ---
@@ -135,6 +151,12 @@ def edit(SITE):
         </div>
         <form method="post" action="/system/items/{act}" enctype="multipart/form-data">
         <div id="dan_bookmark_body_topic" class="dan_bookmark_body active">
+            <div class="dan_flex_row">
+                <div class="tc_l">Раздел</div>
+                <div class="tc_r dan_flex_grow">
+                    <select class="dan_input" name="section_id">{section_id_options}</select>
+                </div>
+            </div>
             <div class="dan_flex_row">
                 <div class="tc_l">Тема</div>
                 <div class="tc_r dan_flex_grow">
@@ -207,14 +229,14 @@ def edit(SITE):
                 <input id="da_synthesis_input" class="dan_input" name="content_synthesis" value="{item['content']['synthesis']}", placeholder="Ответ голосом">
             </div>
             <div id="da_answer" contenteditable="true">{item['content']['answer']}</div>
-            <div id="da_container" class="dan_flex_row da_p_40_0 da_gap_20">{block_left_html}{block_right_html}</div>
+            <div id="da_container" class="dan_flex_row_start da_p_40_0 da_gap_20">{block_left_html}{block_right_html}</div>
         </div>
         <div class="dan_flex_row da_p_40_0">
             <div class="tc_l">
                 <input id="da_submit" class="dan_button_green" type="submit" name="submit" value="Сохранить" data-id="{id}">
             </div>
             <div class="tc_r">
-                <a href="/system/items/{project_id}" class="dan_button_white">Отменить</a>
+                <a href="/system/items/{item['section_id']}" class="dan_button_white">Отменить</a>
             </div>
         </div>
         <input type="hidden" name="project_id" value="{project_id}">

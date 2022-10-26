@@ -4,10 +4,13 @@ from Items import Items
 def insert(SITE):
     SITE.debug('PATH: /system/items/insert.py')
 
+    section_id = SITE.post['section_id']
+
     status = 1 if 'status' in SITE.post else 0
     data = {
         'id': SITE.p[3],
         'project_id': SITE.post['project_id'],
+        'section_id': section_id,
         'name': SITE.post['name'],
         'questions': SITE.post['content_question_input'],
         'content': {
@@ -32,4 +35,4 @@ def insert(SITE):
     if not os.path.isdir(path):
         os.mkdir(path, mode=0o755)
 
-    return {'redirect': '/system/items/' + data['project_id']}
+    return {'redirect': '/system/items/' + section_id}

@@ -9,4 +9,4 @@ def status(SITE):
     
     item = ITEMS.getItem(id)
     
-    return {'redirect': '/system/items/'+str(item['project_id'])}
+    return {'redirect': '/system/items/'+str(item['section_id'])}

@@ -208,7 +208,7 @@ body {
 
 .da_block_left,
 .da_block_right {
-    max-width: 560px;
+    /* max-width: 560px; */
     flex-grow: 1;
     flex-basis: 300px;
 }

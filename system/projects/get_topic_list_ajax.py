@@ -21,9 +21,9 @@ def get_topic_list_ajax(SITE):
         # Если проект не был запущен ранее
         SITE.model['project_id'] = SITE.post['project_id']
         ITEM = Items(SITE)
-        sql_select = 'id, name, questions, status'
 
-        SITE.model['items_list'] = ITEM.getItemList(SITE.model['project_id'], sql_select, status=1)
+        SITE.model['items_list'] = ITEM.getListByProjectId(SITE.model['project_id'], status=1)
+        print(SITE.model['items_list'])
         SITE.model['items_count'] = len(SITE.model['items_list'])
         message = f'Начата обработка данных проекта {SITE.model["project_id"]}'
     else:

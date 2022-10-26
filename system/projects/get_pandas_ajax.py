@@ -12,8 +12,7 @@ def get_pandas_ajax(SITE):
     project_id = SITE.post['id']
     
     ITEM = Items(SITE)
-    sql_select = 'id, questions, status'
-    items = ITEM.getItemList(project_id, sql_select, status=1)
+    items = ITEM.getListByProjectId(project_id, status=1)
     
     data_list = []
     for i, item in enumerate(items):

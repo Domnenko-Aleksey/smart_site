@@ -12,8 +12,7 @@ def insert(SITE):
     data['status'] = 1 if 'status' in SITE.post else 0
 
     PROJECT = Projects(SITE)
-    m = PROJECT.getMaxOrdering()
-    data['ordering'] = m['max_ordering'] + 1 if m is None else 1
+    data['ordering'] = PROJECT.getMaxOrdering() + 1
     project_id = PROJECT.insert(data)
     
     path = 'files/projects/'+str(project_id)+'/model'

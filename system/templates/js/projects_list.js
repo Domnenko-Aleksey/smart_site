@@ -7,6 +7,7 @@ window.addEventListener("DOMContentLoaded", function(){
 		["/system/projects/down", "dan_contextmenu_down", "Вниз"],
 		["#PROJECTS.export_to_pandas", "dan_contextmenu_pandas", "В pandas"],
 		["#PROJECTS.get_model", "dan_contextmenu_fit", "Обучить модель"],
+		["#PROJECTS.init_model", "dan_contextmenu_init", "Сбросить обучение"],
 		["#PROJECTS.load_api_model_ajax", "dan_contextmenu_load", "Загрузить модель в API"],
 		["#PROJECTS.check_bert_ajax", "dan_contextmenu_check", "Проверка BERT"],
 		["#PROJECTS.delete_modal", "dan_contextmenu_delete", "Удалить"]
@@ -97,7 +98,7 @@ PROJECTS = {
 		let content =
 			'<div style="text-align:center;font-size:20px; padding-bottom:20px;">Обучить модель</div>' +
 			'<div style="text-align:center;margin:20px 0px">' +
-				'<input id="modal_epochs" class="dan_input" type="number" name="epochs" min="10" max="500" value="150"> эпох обучения' +
+				'<input id="modal_epochs" class="dan_input" type="number" name="epochs" min="10" max="1000" value="500"> эпох обучения' +
 			'</div>' +
 			'<div class="dan_flex_row">' +
 				'<div style="margin-right:5px">' +
@@ -198,6 +199,18 @@ PROJECTS = {
 				DAN.modal.add(content)
 			}
 		})
+	},
+
+
+	// Сброс процесса обучения модели
+	init_model(obj) {
+		let form = new FormData()
+		form.append('project_id', obj.dataset.id)
+		DAN.ajax('/system/projects/init_model_ajax/', form, (data) => {
+			let content = '<h1 style="text-align:center;">Процесс обучения модели сброшен</h1>'
+			DAN.modal.add(content)			
+		})
+		DAN.modal.spinner()	
 	},
 
 

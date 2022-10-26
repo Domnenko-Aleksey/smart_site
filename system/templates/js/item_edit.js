@@ -18,10 +18,14 @@ ITEM_CONTENT = {
 		DAN.$('button_images').onclick = this.images_add	
 		DAN.$('button_youtube').onclick = this.youtube_edit
 		DAN.$('button_text').onclick = () => {
-			DAN.$('da_block_right').focus()
+			ITEM_CONTENT.right_block_set()
+			ITEM_CONTENT.set_editor(true)
 		}
-		DAN.$('da_block_right').onblur = () => {
-			DAN.$('content_text_input').value = ITEM_CONTENT.editor.getData()
+
+		if (DAN.$('da_block_right')) {
+			DAN.$('da_block_right').onblur = () => {
+				DAN.$('content_text_input').value = ITEM_CONTENT.editor.getData()
+			}
 		}
 		
 		// События на иконках
@@ -32,11 +36,46 @@ ITEM_CONTENT = {
 			}
 		}
 
+		ITEM_CONTENT.set_editor()  // Установка редактора
+	},
+
+
+	// Проверяет наличие левого блока и при необходимости - добавляет левый блок
+	left_block_set() {
+		if (!DAN.$('da_block_left')) {
+			let html = '<div id="da_block_left" class="da_block_left"></div>'
+			DAN.$('da_container').insertAdjacentHTML('afterbegin', html)
+		}
+	},
+
+
+	// Проверяет наличие правого блока и при необходимости - добавляет правый блок
+	right_block_set() {
+		if (!DAN.$('da_block_right')) {
+			let html = '<div id="da_block_right" class="da_block_right"></div>'
+			DAN.$('da_container').insertAdjacentHTML('beforeend', html)
+		}
+
+		DAN.$('da_block_right').onblur = () => {
+			DAN.$('content_text_input').value = ITEM_CONTENT.editor.getData()
+		}
+	},
+
+
+	// Установка визуального редактора
+	set_editor(focus=false) {
 		if (!ITEM_CONTENT.editor) {
 			InlineEditor
 				.create(DAN.$('da_block_right'))
-				.then(newEditor => {ITEM_CONTENT.editor = newEditor;})
-				.catch(error => {console.error(error);});
+				.then(newEditor => {
+					ITEM_CONTENT.editor = newEditor;
+					if (focus)
+						DAN.$('da_block_right').focus();
+				})
+				.catch(error => {console.log(error);});
+		} else {
+			if (focus)
+				DAN.$('da_block_right').focus()
 		}
 	},
 
@@ -75,7 +114,7 @@ ITEM_CONTENT = {
 			// Создаёт список вопросов в HTML
 			DAN.$('da_questions_list').innerHTML = ''
 			let question_unique = new Set(question_arr)  // Уникальные значения массива
-			question_unique.forEach(ITEM_CONTENT.insertQuestion)
+			question_unique.forEach(ITEM_CONTENT.insert_question)
 			DAN.$('content_question_input').value = ITEM_CONTENT.questions_html_to_arr().join(';')
 
 			DAN.modal.del()
@@ -116,7 +155,8 @@ ITEM_CONTENT = {
 			// Создаёт список вопросов в HTML
 			DAN.$('da_questions_list').innerHTML = ''
 			let question_unique = new Set(question_arr)  // Уникальные значения массива
-			question_unique.forEach(ITEM_CONTENT.insertQuestion)
+			question_arr = Array.from(question_unique).sort()  // Преобразуем в массив и сортируем
+			question_arr.forEach(ITEM_CONTENT.insert_question)
 			DAN.$('content_question_input').value = ITEM_CONTENT.questions_html_to_arr().join(';')
 
 			DAN.modal.del()
@@ -126,7 +166,7 @@ ITEM_CONTENT = {
 
 
 	// Добавляет вопросы в html
-	insertQuestion(question){
+	insert_question(question){
 		if (question.length < 4 || question.length > 80)
 			return
 		question_html = '<div class="da_question_wrap drag_drop_ico" data-target-id="da_questions_list" ' +
@@ -238,9 +278,6 @@ ITEM_CONTENT = {
 			youtube_src = youtube_src.replace('youtu.be', 'youtube.com/embed')
 			youtube_src = youtube_src.split('&')[0]
 			
-			let da_image_arr = document.getElementsByClassName('da_image')
-			let e_block_images_wrap_arr = document.getElementsByClassName('e_block_images_wrap')
-			
 			if (youtube_src) {
 				let youtube_frame = DAN.$('da_youtube_frame')
 				if (youtube_frame) {
@@ -270,6 +307,7 @@ ITEM_CONTENT = {
 
 	// Добавяляет изображений
 	images_add() {
+		ITEM_CONTENT.left_block_set()
 		let content =
 			'<h2>Добавить изображения</h2>' +
 			'<div class="dan_flex_row e_p_5_20">' +

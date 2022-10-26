@@ -1,3 +1,4 @@
+import datetime
 import sys
 import base64
 from cryptography import fernet
@@ -13,6 +14,8 @@ from mainpage import mainpage
 from projects import projects
 from users import users
 from items import items
+from sections import sections
+from qa import qa
 from components import components
 
 app = web.Application(client_max_size=1024**100)
@@ -29,7 +32,8 @@ SITE.debug_on = True  # Выводить отладочную информаци
 
 @aiohttp_jinja2.template('main.html')
 async def system_r(request):
-    SITE.debug('===== SYSTEM =====')
+    now = datetime.datetime.now()
+    SITE.debug(f'===== SYSTEM ===== {now}')
     SITE.debug('REQUEST:')
     SITE.debug(request)
 
@@ -52,7 +56,9 @@ async def system_r(request):
         '': mainpage.mainpage,
         'projects': projects.router,
         'users': users.router,
+        'sections': sections.router,
         'items': items.router,
+        'qa': qa.qa,
         'com': components.router,
     }
 

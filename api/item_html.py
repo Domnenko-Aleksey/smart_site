@@ -40,15 +40,19 @@ def item_html(SITE, item):
 
 
     # --- Левый блок ---
-    block_left_html = f'<div id="da_block_left" class="da_block_left">{youtube_html}{images_html}</div>'
+    block_left_html = ''
+    if youtube_html != '' or images_html != '':
+        block_left_html = f'<div id="da_block_left" class="da_block_left">{youtube_html}{images_html}</div>'
 
 
     # --- Правый блок ---
-    block_right_html = f'<div id="da_block_right" class="da_block_right">{item["content"]["text"]}</div>'
+    block_right_html = ''
+    if item["content"]["text"] != '':
+        block_right_html = f'<div id="da_block_right" class="da_block_right">{item["content"]["text"]}</div>'
 
 
     # --- Контент ---
     answer_content  =  '<div id="da_answer" data-id="' + str(item["id"]) + '">' + item["content"]["answer"] + '</div>'
-    answer_content +=  '<div class="da_flex_row da_gap_20">' + block_left_html + block_right_html + '</div>'
+    answer_content +=  '<div class="da_flex_row_start da_gap_20">' + block_left_html + block_right_html + '</div>'
 
     return answer_content

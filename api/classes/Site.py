@@ -13,7 +13,7 @@ class Site:
         self.db = False  # con.cursor()
         self.mysql_connect()
 
-    
+
     # Подключаем базу данных
     def mysql_connect(self):
         con = pymysql.connect(
@@ -26,7 +26,10 @@ class Site:
             cursorclass=pymysql.cursors.DictCursor
         )
         self.db_connect = con
-        self.db = con.cursor()
+        self.db = self.db_connect.cursor()
+        print('-----------', self.db_connect.open)
+        # self.db = self.db_connect.cursor()
+
 
 
     # Инициализация при открытии страниы
@@ -41,9 +44,7 @@ class Site:
         self.headFile = []  # Файлы для вывода в шапке шаблона
         self.auth = 0  # Авторизация 0 => нет; 1 - 9 => администраторы; 10 - 100 => пользователи
         self.session = False
-        if not self.db_connect.open:
-            # Если соединение с mysql закрыто - открываем его
-            self.mysql_connect()
+        self.db_connect.ping(reconnect=True)  # Проверяем соединение и если оно закрыто - открываем
 
 
     # Обработка запроса

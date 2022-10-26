@@ -26,7 +26,7 @@ class Site:
             cursorclass=pymysql.cursors.DictCursor
         )
         self.db_connect = con
-        self.db = con.cursor()
+        self.db = self.db_connect.cursor()
 
 
     # Инициализация модели
@@ -58,10 +58,8 @@ class Site:
         self.headFile = []  # Файлы для вывода в шапке шаблона
         self.auth = 0  # Авторизация 0 => нет; 1 - 9 => администраторы; 10 - 100 => пользователи
         self.session = False
-        if not self.db_connect.open:
-            # Если соединение с mysql закрыто - открываем его
-            print('НОВОЕ ПОДКЛЮЧЕНИЕ')
-            self.mysql_connect()
+        self.db_connect.ping(reconnect=True)  # Проверяем соединение и если оно закрыто - открываем
+        # if not self.db_connect.open:         
 
 
     # Обработка запроса

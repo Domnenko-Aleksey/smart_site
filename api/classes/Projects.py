@@ -2,6 +2,7 @@ import uuid
 
 class Projects:
     def __init__(self, SITE):
+        self.db_connect = SITE.db_connect
         self.db = SITE.db
 
 
@@ -56,7 +57,7 @@ class Projects:
         sql = "SELECT id FROM project WHERE user_id=%s"
         self.db.execute(sql, (user_id))
         return self.db.fetchone()
-        
+            
     
     # Максимальное значение 'ordering'
     def getMaxOrdering(self):
