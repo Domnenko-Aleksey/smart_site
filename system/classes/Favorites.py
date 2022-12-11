@@ -13,6 +13,13 @@ class Favorites:
         return self.db.fetchall()
 
 
+    def getByProjectId(self, project_id, limit=10):
+        sql =   "SELECT id, favorites, date_c, date_l FROM favorites f "
+        sql +=  "WHERE project_id = %s ORDER BY date_l DESC LIMIT %s"
+        self.db.execute(sql, (project_id, limit))
+        return self.db.fetchall()
+
+
     # Получаем избранное по 'cid'
     def getFavoritesByProjectIdVisitorId(self, project_id, visitor_id):
         sql = "SELECT id, favorites FROM favorites WHERE project_id = %s AND visitor_id = %s LIMIT 1"

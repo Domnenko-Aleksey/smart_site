@@ -30,7 +30,7 @@ class Qa:
 
 
     def getByProjectId(self, project_id, limit=10):
-        sql =   "SELECT q.question, q.item_id, q.date, i.name FROM qa q "
+        sql =   "SELECT q.visitor_id, q.question, q.item_id, q.date, i.name FROM qa q "
         sql +=  "JOIN items i ON i.id = q.item_id "
         sql +=  "WHERE q.project_id = %s ORDER BY q.date DESC LIMIT %s"
         self.db.execute(sql, (project_id, limit))

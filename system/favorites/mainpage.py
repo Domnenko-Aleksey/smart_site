@@ -1,12 +1,13 @@
+import json
 from Projects import Projects
-from Qa import Qa
+from Favorites import Favorites
 
 
-def qa(SITE):
-    SITE.debug('PATH: /system/qa/qa.py')
+def mainpage(SITE):
+    SITE.debug('PATH: /system/favorites/favorites.py')
 
     SITE.addHeadFile('/lib/DAN/DAN.css')
-    SITE.addHeadFile('/system/templates/css/project.css')
+    SITE.addHeadFile('/system/templates/css/favorites.css')
 
     project_id = int(SITE.p[2])
     
@@ -14,12 +15,15 @@ def qa(SITE):
     project = PROJECT.getProject(project_id, True)
 
     # Вопрос - ответ
-    QA = Qa(SITE)
-    qa = QA.getByProjectId(project_id, 100)
-    qa_tr_html = ''
-    if qa:
-        for n, q in enumerate(qa):
-            qa_tr_html += f'''<tr><td>{n+1}</td><td>{q['visitor_id']}</td><td>{q['question']}</td><td>{q['name']}</td><td>{q['date']}</td></tr>'''
+    FAVORITES = Favorites(SITE)
+    favorites = FAVORITES.getByProjectId(project_id, 100)
+    favorites_tr_html = ''
+    if favorites:
+        for n, fav in enumerate(favorites):
+            fav_arr = json.loads(fav['favorites'])
+            fav_list = fav_arr.values()
+            fav_str = '<br>'.join(fav_list)
+            favorites_tr_html += f'''<tr><td>{n+1}</td><td><div class="fav_str">{fav_str}</div></td><td>{fav['date_l']}</td><td>{fav['date_c']}</td></tr>'''
 
 
     SITE.content = f'''
@@ -40,7 +44,7 @@ def qa(SITE):
                 <svg><use xlink:href="/system/templates/images/sprite.svg#favorite"></use></svg>
                 <div class="ico_square_text">Избранное</div>
             </a>
-            <a href="/system/qa/{project['id']}" class="ico_square">
+            <a href="/system/favorites/{project['id']}" class="ico_square">
                 <svg><use xlink:href="/system/templates/images/sprite.svg#question"></use></svg>
                 <div class="ico_square_text">Вопрос - ответ</div>
             </a>
@@ -49,11 +53,10 @@ def qa(SITE):
         <table class="admin_table dan_even_odd">
             <tr>
                 <th style="width:50px">№</th>
-                <th style="width:80px">Посетитель</th>
-                <th>Вопрос</th>
-                <th style="width:250px">Тема ответа</th>
-                <th style="width:150px">Дата</th>
+                <th style="width:250px">Избранное</th>
+                <th style="width:150px">Последняя</th>
+                <th style="width:150px">Создание</th>
             </tr>
-            {qa_tr_html}
+            {favorites_tr_html}
         </table>   
     '''

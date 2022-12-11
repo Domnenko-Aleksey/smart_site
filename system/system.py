@@ -16,6 +16,7 @@ from users import users
 from items import items
 from sections import sections
 from qa import qa
+from favorites import favorites
 from components import components
 
 app = web.Application(client_max_size=1024**100)
@@ -59,6 +60,7 @@ async def system_r(request):
         'sections': sections.router,
         'items': items.router,
         'qa': qa.qa,
+        'favorites': favorites.router,
         'com': components.router,
     }
 
