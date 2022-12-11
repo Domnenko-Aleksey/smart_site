@@ -55,15 +55,27 @@ def edit(SITE):
             </div>
         </div>
         <div class="dan_flex_row">
-            <div class="tc_l">Заголовок</div>
+            <div class="tc_l">Метатег "Title"</div>
             <div class="tc_r dan_flex_grow">
                 <input class="dan_input w_400" name="title" type="text" required="" value="{project['title']}">
             </div>
         </div>
         <div class="dan_flex_row">
-            <div class="tc_l">Описание</div>
+            <div class="tc_l">Метатег "Description"</div>
             <div class="tc_r dan_flex_grow">
                 <textarea class="dan_input w_400" name="description" rows="3">{project['description']}</textarea>
+            </div>
+        </div>
+        <div class="dan_flex_row">
+            <div class="tc_l">Вступление - текст</div>
+            <div class="tc_r dan_flex_grow">
+                <input class="dan_input w_400" name="intro_text" type="text" value="{project['settings']['intro_text']}">
+            </div>
+        </div>
+        <div class="dan_flex_row">
+            <div class="tc_l">Вступление - голос</div>
+            <div class="tc_r dan_flex_grow">
+                <input class="dan_input w_400" name="intro_speech" type="text" value="{project['settings']['intro_speech']}">
             </div>
         </div>
         <div class="dan_flex_row">

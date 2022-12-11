@@ -1,10 +1,11 @@
+import datetime
 import sys
 from aiohttp import web
 sys.path.append('classes')
 from Site import Site
 from ClsModel import ClsModel
 
-import get_title_ajax
+import get_intro_ajax
 import get_speech_answer_ajax
 import get_id_answer_ajax
 import get_fav_ajax
@@ -25,13 +26,14 @@ SITE.debug(SITE.models)
 
 
 async def index(request):
-    SITE.debug('===== INDEX =====')
+    now = datetime.datetime.now()
+    SITE.debug(f'===== INDEX ===== {now}')
     SITE.initial()
     SITE.procReq(request)
     SITE.post = await request.post()  # Ждём получение файлов методом POST
 
     functions = {
-        'get_title_ajax': get_title_ajax.get_title_ajax,
+        'get_intro_ajax': get_intro_ajax.get_intro_ajax,
         'get_id_answer_ajax': get_id_answer_ajax.get_id_answer_ajax,
         'get_speech_answer_ajax': get_speech_answer_ajax.get_speech_answer_ajax,
         'get_fav_ajax': get_fav_ajax.get_fav_ajax,

@@ -1,4 +1,5 @@
 import uuid
+import json
 
 class Projects:
     def __init__(self, SITE):
@@ -24,7 +25,7 @@ class Projects:
             ON u.id = p.user_id
             ORDER BY p.ordering
             '''
-            
+
         self.db.execute(sql)
         return self.db.fetchall()
 
@@ -43,7 +44,10 @@ class Projects:
             ORDER BY p.ordering
             '''
         self.db.execute(sql, (id))
-        return self.db.fetchone()
+
+        arr = self.db.fetchone()
+        arr['settings'] = json.loads(arr['settings'])
+        return arr
 
 
     # Возвращает проект по id
@@ -71,16 +75,51 @@ class Projects:
 
     # Добавляет проект в БД
     def insert(self, data):
-        sql = "INSERT INTO projects SET user_id = %s, domain = %s, name = %s, title = %s, description = %s, settings = '', ordering = %s, status = %s"
-        self.db.execute(sql, (data['user_id'], data['domain'], data['name'], data['title'], data['description'], data['ordering'], data['status']))
+        sql = '''
+            INSERT INTO projects SET 
+                user_id = %s, 
+                domain = %s, 
+                name = %s, 
+                title = %s, 
+                description = %s, 
+                settings = %s, 
+                ordering = %s, 
+                status = %s
+            '''
+        self.db.execute(sql, (
+            data['user_id'], 
+            data['domain'], 
+            data['name'], 
+            data['title'], 
+            data['description'], 
+            json.dumps(data['settings']), 
+            data['ordering'], 
+            data['status'])
+        )
         self.db.execute("SELECT MAX(id) max_id FROM projects")
         return self.db.fetchone()['max_id']
 
 
     # Обновляет проект в БД
     def update(self, data):
-        sql = "UPDATE projects SET domain = %s, name = %s, title = %s, description = %s, status = %s WHERE id = %s"
-        self.db.execute(sql, (data['domain'], data['name'], data['title'], data['description'], data['status'], data['id']))
+        sql = '''
+            UPDATE projects SET 
+                domain = %s, 
+                name = %s, 
+                title = %s, 
+                description = %s, 
+                settings = %s,
+                status = %s 
+            WHERE id = %s'''
+        self.db.execute(sql, (
+            data['domain'], 
+            data['name'], 
+            data['title'], 
+            data['description'], 
+            json.dumps(data['settings']), 
+            data['status'], 
+            data['id'])
+        )
 
 
     # Обновляет статус

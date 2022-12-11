@@ -1,34 +1,9 @@
-import pymysql
-import pymysql.cursors
-import config
-
-
 class Site:
     # Инициализация при запуске системы
     def __init__(self):
+        self.db = False  # Объект подключения к БД
         self.salt = 'DAN_core_salt'  # Соль
         self.debug_on = False
-        self.models = {}  # Словарь моделей {'project id': model}
-        self.db_connect = False  # Соединение с базой данных, инициализируем ниже
-        self.db = False  # con.cursor()
-        self.mysql_connect()
-
-
-    # Подключаем базу данных
-    def mysql_connect(self):
-        con = pymysql.connect(
-            host=config.host,
-            user=config.user,
-            password=config.password,
-            db=config.db,
-            charset='utf8mb4',
-            autocommit=True,
-            cursorclass=pymysql.cursors.DictCursor
-        )
-        self.db_connect = con
-        self.db = self.db_connect.cursor()
-        # self.db = self.db_connect.cursor()
-
 
 
     # Инициализация при открытии страниы
@@ -43,7 +18,6 @@ class Site:
         self.headFile = []  # Файлы для вывода в шапке шаблона
         self.auth = 0  # Авторизация 0 => нет; 1 - 9 => администраторы; 10 - 100 => пользователи
         self.session = False
-        self.db_connect.ping(reconnect=True)  # Проверяем соединение и если оно закрыто - открываем
 
 
     # Обработка запроса

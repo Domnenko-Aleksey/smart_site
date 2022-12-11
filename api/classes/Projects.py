@@ -1,4 +1,5 @@
 import uuid
+import json
 
 class Projects:
     def __init__(self, SITE):
@@ -46,10 +47,12 @@ class Projects:
 
 
     # Возвращает 'title' по домену
-    def getTitleByDomain(self, domain):
-        sql = "SELECT title FROM projects WHERE domain=%s LIMIT 1"
+    def getIntroByDomain(self, domain):
+        sql = "SELECT settings FROM projects WHERE domain=%s LIMIT 1"
         self.db.execute(sql, (domain))
-        return self.db.fetchone()['title']
+        arr = self.db.fetchone()
+        arr['settings'] = json.loads(arr['settings'])
+        return {'intro_text': arr['settings']['intro_text'], 'intro_speech': arr['settings']['intro_speech']}
 
 
     # Возвращает id проекта по user id

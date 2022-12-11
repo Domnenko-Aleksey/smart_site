@@ -1,0 +1,58 @@
+Cannot decrypt cookie value, create a new fresh session
+Cannot decrypt cookie value, create a new fresh session
+======== Running on http://0.0.0.0:9001 ========
+(Press CTRL+C to quit)
+===== SYSTEM ===== 2022-11-30 09:39:47.214442
+REQUEST:
+<Request GET /system/projects >
+ИНИЦИАЛИЗАЦИЯ
+===== AUTH ===== 2022-11-30 09:39:47.215711
+Нет авторизации
+===== SYSTEM ===== 2022-11-30 09:39:52.300179
+REQUEST:
+<Request POST /system/auth >
+ИНИЦИАЛИЗАЦИЯ
+===== AUTH ===== 2022-11-30 09:39:52.301046
+Проверка пароля <MultiDictProxy('login': 'dan', 'password': 'soyuz6607', 'button': 'Вход')>
+Проверка пароля прошла успешно!
+===== SYSTEM ===== 2022-11-30 09:39:52.337381
+REQUEST:
+<Request GET /system/ >
+ИНИЦИАЛИЗАЦИЯ
+===== AUTH ===== 2022-11-30 09:39:52.337962
+Авторизация - успешна, <Session [new:False, changed:False, created:1669790392] {'auth': 1669790392.3010828}>
+/system/mainpage/mainpage.py
+SQL TEXT:
+SELECT q.project_id, q.question, q.item_id, q.date, i.name, p.name project_name FROM qa q JOIN projects p ON p.id = q.project_id JOIN items i ON i.id = q.item_id ORDER BY q.date DESC LIMIT 10
+===== SYSTEM ===== 2022-11-30 09:39:57.807896
+REQUEST:
+<Request GET /system/projects >
+ИНИЦИАЛИЗАЦИЯ
+===== AUTH ===== 2022-11-30 09:39:57.808908
+Авторизация - успешна, <Session [new:False, changed:False, created:1669790392] {'auth': 1669790392.3010828}>
+PATH: /system/projects/projects.py (router)
+PATH: /system/projects/mainpage.py
+===== SYSTEM ===== 2022-11-30 09:39:59.922511
+REQUEST:
+<Request GET /system/projects/edit/1 >
+ИНИЦИАЛИЗАЦИЯ
+===== AUTH ===== 2022-11-30 09:39:59.923968
+Авторизация - успешна, <Session [new:False, changed:False, created:1669790392] {'auth': 1669790392.3010828}>
+PATH: /system/projects/projects.py (router)
+PATH: /system/projects/edit.py
+===== SYSTEM ===== 2022-11-30 09:40:20.320216
+REQUEST:
+<Request POST /system/projects/update/1 >
+ИНИЦИАЛИЗАЦИЯ
+===== AUTH ===== 2022-11-30 09:40:20.323200
+Авторизация - успешна, <Session [new:False, changed:False, created:1669790392] {'auth': 1669790392.3010828}>
+PATH: /system/projects/projects.py (router)
+PATH: /system/projects/update.py
+===== SYSTEM ===== 2022-11-30 09:40:20.357676
+REQUEST:
+<Request GET /system/projects >
+ИНИЦИАЛИЗАЦИЯ
+===== AUTH ===== 2022-11-30 09:40:20.358268
+Авторизация - успешна, <Session [new:False, changed:False, created:1669790392] {'auth': 1669790392.3010828}>
+PATH: /system/projects/projects.py (router)
+PATH: /system/projects/mainpage.py
